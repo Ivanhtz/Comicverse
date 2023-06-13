@@ -1,26 +1,26 @@
-const { Component } = require("react");
+// const { Component } = require("react");
 
-class Footer extends Component {
+// class Footer extends Component {
 
-    render() {
+//     render() {
 
-        return (
-            <footer className="footer">
-                <p className="footer__text">Texto Footer</p>
+//         return (
+//             <footer className="footer">
+//                 <p className="footer__text">Texto Footer</p>
 
-                <div className="footer__social">
-                    <div className="fb">
+//                 <div className="footer__social">
+//                     <div className="fb">
+//                         <img src=""></img>
+//                     </div>
 
-                    </div>
+//                     <div className="ins">
+//                         <img src=""></img>
+//                     </div>
+//                 </div>
+//             </footer>
+//         )
+//     }
 
-                    <div className="ins">
+// }
 
-                    </div>
-                </div>
-            </footer>
-        )
-    }
-
-}
-
-export default Footer;
+// export default Footer;
