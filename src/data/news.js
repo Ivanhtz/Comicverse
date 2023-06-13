@@ -8,7 +8,7 @@ noticias = noticias.map((noticia) => {
     title: faker.lorem.sentence(),
     image: faker.image.url(),
     content: faker.lorem.paragraphs(3),
-    author: faker.person.firstName(),
+    author:faker.person.firstName(),
     date: faker.date.past().toLocaleDateString(),
   };
 });
