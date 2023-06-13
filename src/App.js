@@ -10,6 +10,7 @@ import Comics from './pages-dinamics/comics/Comics'
 import News from './pages-dinamics/news/News'
 import Users from './pages-dinamics/users/Users'
 import User from './pages-dinamics/users/User'
+import Comic from './pages-dinamics/comics/Comic';
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={""}></Route>
           <Route path="/noticias" element={<News />}></Route>
           <Route path="/comics" element={<Comics />}></Route>
+		  <Route path="/comics/:id" element={<Comic />}></Route>
           <Route path="/usuarios" element={<Users />}></Route>
           <Route path="/usuarios/:id" element={<User />}></Route>
           <Route path="/quienes-somos" element={""}></Route>
