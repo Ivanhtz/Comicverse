@@ -13,7 +13,13 @@ function Nav(){
 					<Link to="/login">Iniciar Sesion</Link>
 				</li>
 				<li>
+					<Link to="/noticias">Noticias</Link>
+				</li>
+				<li>
 					<Link to="/comics">Comics</Link>
+				</li>
+				<li>
+					<Link to="/usuarios">Usuarios</Link>
 				</li>
 				<li>
 					<Link to="/quienes-somos">Sobre nosotros</Link>

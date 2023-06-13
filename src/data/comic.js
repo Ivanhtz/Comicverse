@@ -15,7 +15,7 @@ comics = comics.map(post=>{
         title:faker.lorem.sentence(),
         image:faker.image.url(),
         content:faker.lorem.sentences(100),
-        author:faker.person.firstName() && faker.person.middleName
+        author:faker.person.firstName() + " " + faker.person.middleName()
     }
 })
 
