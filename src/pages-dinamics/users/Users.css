@@ -1,0 +1,74 @@
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.titleUsers {
+    text-align: center;
+}
+
+.flexUsers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 16px;
+}
+
+.card {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-bottom: 16px;
+}
+
+.card-content {
+    text-align: center;
+}
+
+.card-title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.card-description {
+    margin-top: 8px;
+}
+
+.card-email {
+    margin-top: 16px;
+}
+
+.usuariosButton {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.usuariosButton:hover {
+    background-color: #0056b3;
+}
+
+.usuariosButton:focus {
+    outline: none;
+}
