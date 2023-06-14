@@ -13,6 +13,7 @@ import User from './pages-dinamics/users/User'
 import Comic from './pages-dinamics/comics/Comic';
 import New from './pages-dinamics/news/New';
 import UsersBackForm from './backend/users-back/users-back-form/UsersBackForm';
+import NewsBack from './backend/news-back/NewsBack';
 
 
 function App() {
@@ -27,12 +28,14 @@ function App() {
           <Route path="/noticias/:id" element={<New></New>}></Route>
           <Route path="/comics" element={<Comics />}></Route>
           <Route path="/comics/:id" element={<Comic />}></Route>
+          <Route path="/comics/:id" element={<Comic />}></Route>
           <Route path="/usuarios" element={<Users />}></Route>
           <Route path="/usuarios/:id" element={<User />}></Route>
           <Route path="/quienes-somos" element={""}></Route>
           <Route path="/contacto" element={""}></Route>
           <Route path="/usuarios-servidor" element={<UsersBackForm />}></Route>
 
+          <Route path="/news-back" element={<NewsBack></NewsBack>}></Route>
         </Routes>
       </Router>
     </>

@@ -30,10 +30,14 @@ function Nav() {
 					<li>
 						<Link to="/usuarios-servidor">Usuarios Servidor</Link>
 					</li>
+					<li>
+						<Link to="/news-back">Formulario Noticias</Link>
+					</li>
 				</ul>
 			</nav>
 		</>
 	);
+
 }
 
 export default Nav;

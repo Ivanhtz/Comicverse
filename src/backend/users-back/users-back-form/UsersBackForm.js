@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from 'react';
 
 class UsersBackForm extends Component {
 
@@ -10,6 +10,20 @@ class UsersBackForm extends Component {
             image: '',
             description: '',
             email: ''
+        };
+    }
+
+    componentDidMount() {
+
+        const savedUsers = localStorage.getItem('newsArray');
+
+        if (!savedUsers) {
+            const initialUsers = [];
+            localStorage.setItem('newsArray', JSON.stringify(initialUsers));
+        }
+
+        if (savedUsers) {
+            this.setState({ newsArray: JSON.parse(savedUsers) });
         }
     }
 
@@ -20,54 +34,79 @@ class UsersBackForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const values = JSON.stringify(this.state);
-        console.log(values);
-    }
+        const { name, image, description, email, newsArray } = this.state;
+
+        const newUser = {
+            name: name,
+            image: image,
+            description: description,
+            email: email
+        };
+
+        const updatedUsersArray = [...newsArray, newUser];
+
+        this.setState({ newsArray: updatedUsersArray });
+
+        this.setState({
+            name: '',
+            image: '',
+            description: '',
+            email: ''
+        });
+
+        localStorage.setItem('newsArray', JSON.stringify(updatedUsersArray));
+
+    };
 
     render() {
         const { name, image, description, email } = this.state;
 
         return (
             <>
+                <h2>
+                    Agrega nuevo usuario
+                </h2>
+
                 <form onSubmit={this.handleSubmit}>
-                    <p>
-                        <label>Alta de Usuario Nuevo</label>
-                    </p>
-                    <p>
-                        <label>Nombre</label>
-                    </p>
-                    <p>
-                        <input name="nombre" type="text" value={name}
-                            onChange={this.handleChange}>
-                        </input>
-                    </p>
+                    <div>
+                        <label>Nombre:</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={name}
+                            onChange={this.handleChange}
+                        />
+                    </div>
 
-                    <p>
-                        <label>Imagen</label>
-                    </p>
-                    <p>
-                        <input name="imagen" type="text" value={image}
-                            onChange={this.handleChange}>
-                        </input>
-                    </p>
+                    <div>
+                        <label>Imágen:</label>
+                        <input
+                            type="text"
+                            name="image"
+                            value={image}
+                            onChange={this.handleChange}
+                        />
+                    </div>
 
-                    <p>
-                        <label>Descripción</label>
-                    </p>
-                    <p>
-                        <input name="descripcion" type="text" value={description}
-                            onChange={this.handleChange}>
-                        </input>
-                    </p>
+                    <div>
+                        <label>Descripción:</label>
+                        <input
+                            type="text"
+                            name="description"
+                            value={description}
+                            onChange={this.handleChange}
+                        />
+                    </div>
 
-                    <p>
-                        <label>Email</label>
-                    </p>
-                    <p>
-                        <input name="email" type="email" value={email}
-                            onChange={this.handleChange}>
-                        </input>
-                    </p>
+                    <div>
+                        <label>Email:</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={email}
+                            onChange={this.handleChange}
+                        />
+                    </div>
                     <button type="submit">Enviar</button>
                 </form>
             </>
