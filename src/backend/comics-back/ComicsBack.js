@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-const { Component } = require("react");
+import React, { Component } from 'react';
 
 class ComicsBack extends Component {
 
@@ -11,17 +11,20 @@ class ComicsBack extends Component {
 			imagen: "",
 			contenido: "",
 			autor: "",
-			
 		};
 	}
 
 	componentDidMount() {
-		const comics = sessionStorage.getItem("comics");
+		const comics = localStorage.getItem("comics");
 
 		if(!comics){
 			let comicsArray = [];
-			sessionStorage.setItem("comics", JSON.stringify(comicsArray));
+			localStorage.setItem("comics", JSON.stringify(comicsArray));
 		}
+
+		// if (comics) {
+		// 	this.setState({ newsArray: JSON.parse(comics) });
+		//   }
 
 	}
 
@@ -31,16 +34,30 @@ class ComicsBack extends Component {
 	}
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const values = this.state;
-		console.log(values);
-		const newComic = {...values};
+		//Crea el objeto
+		const newComic = this.state
 		console.log(newComic);
 
-		let arrayNuevo = JSON.parse(sessionStorage.getItem("comics"));
+		//Me devuelve el array
+		let arrayNuevo = JSON.parse(localStorage.getItem("comics"));
 
-		arrayNuevo.push(newComic);
+		//Comprobacion
+		if(!arrayNuevo){
+			arrayNuevo=[]
+		}
 
-		sessionStorage.setItem("comics", JSON.stringify(arrayNuevo));
+		//Esto es la adicion
+		const arrayUpdateado=[...arrayNuevo,newComic]
+
+		this.setState({
+            titulo: '',
+            imagen: '',
+            contenido: '',
+            autor: ''
+        });
+
+
+		localStorage.setItem("comics", JSON.stringify(arrayUpdateado));
 	}
 
     render() {

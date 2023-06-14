@@ -15,11 +15,11 @@ class UsersBackForm extends Component {
 
     componentDidMount() {
 
-        const savedUsers = localStorage.getItem('newsArray');
+        const savedUsers = localStorage.getItem('userArray');
 
         if (!savedUsers) {
             const initialUsers = [];
-            localStorage.setItem('newsArray', JSON.stringify(initialUsers));
+            localStorage.setItem('userArray', JSON.stringify(initialUsers));
         }
 
         if (savedUsers) {
@@ -54,7 +54,7 @@ class UsersBackForm extends Component {
             email: ''
         });
 
-        localStorage.setItem('newsArray', JSON.stringify(updatedUsersArray));
+        localStorage.setItem('userArray', JSON.stringify(updatedUsersArray));
 
     };
 
