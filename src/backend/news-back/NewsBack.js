@@ -15,7 +15,6 @@ class NewsBack extends Component {
   componentDidMount() {
     // Retrieve news data from localStorage
     const savedNews = localStorage.getItem('newsArray');
-
     if (!savedNews) {
       const initialNews = []; // Array inicial de noticias si no existe en el localStorage
       localStorage.setItem('newsArray', JSON.stringify(initialNews));
