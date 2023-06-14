@@ -27,6 +27,9 @@ function Nav(){
 				<li>
 					<Link to="/contacto">Contacto</Link>
 				</li>
+				<li>
+					<Link to="/news-back">Formulario Noticias</Link>
+				</li>
 			</ul>
 		</nav>
       </>
