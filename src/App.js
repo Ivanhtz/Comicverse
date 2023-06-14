@@ -15,22 +15,25 @@ import New from './pages-dinamics/news/New';
 import ComicsBack from './backend/comics-back/ComicsBack';
 import UsersBackForm from './backend/users-back/users-back-form/UsersBackForm';
 import NewsBack from './backend/news-back/NewsBack';
+import Nav2 from './layout/nav2/Nav2';
+
 
 
 function App() {
   return (
     <>
       <Router>
-        <Nav />
+        {/* <Nav /> */}
+        <Nav2 />
         <Routes>
           <Route path="/" element={""}></Route>
           <Route path="/login" element={""}></Route>
           <Route path="/noticias" element={<News />}></Route>
           <Route path="/noticias/:id" element={<New></New>}></Route>
           <Route path="/comics" element={<Comics />}>
-		  	<Route path="/comics/comicsback" element={<ComicsBack />}></Route>
-		  </Route>
-		  <Route path="/comics/:id" element={<Comic />}></Route>
+            <Route path="/comics/comicsback" element={<ComicsBack />}></Route>
+          </Route>
+          <Route path="/comics/:id" element={<Comic />}></Route>
           <Route path="/comics" element={<Comics />}></Route>
           <Route path="/comics/:id" element={<Comic />}></Route>
           <Route path="/comics/:id" element={<Comic />}></Route>
@@ -41,7 +44,7 @@ function App() {
           <Route path="/usuarios-servidor" element={<UsersBackForm />}></Route>
 
           <Route path="/news-back" element={<NewsBack></NewsBack>}></Route>
-		  <Route path="/comics-back" element={<ComicsBack/>}></Route>
+          <Route path="/comics-back" element={<ComicsBack />}></Route>
         </Routes>
       </Router>
     </>

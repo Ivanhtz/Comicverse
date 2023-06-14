@@ -1,0 +1,89 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav li {
+    margin-left: 20px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+}
+
+.nav-toggle {
+    display: none;
+    /* Ocultar el botón de toggle en pantallas grandes */
+}
+
+/* Estilos para pantallas pequeñas (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .nav {
+        display: none;
+        /* Ocultar la barra de navegación en pantallas pequeñas */
+        width: 100%;
+    }
+
+    .nav.open {
+        display: flex;
+        /* Mostrar la barra de navegación cuando está abierta */
+        flex-direction: column;
+        align-items: center;
+        background-color: #f2f2f2;
+        padding: 10px;
+    }
+
+    .nav li {
+        margin: 10px 0;
+    }
+
+    .nav-toggle {
+        display: block;
+        /* Mostrar el botón de toggle en pantallas pequeñas */
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .toggle-icon {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        position: relative;
+        transition: background-color 0.3s ease;
+    }
+
+    .toggle-icon:before,
+    .toggle-icon:after {
+        content: '';
+        position: absolute;
+        width: 100
+    }
+}
