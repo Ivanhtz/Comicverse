@@ -1,5 +1,5 @@
 import './App.css';
-import Nav from './layout/nav/nav'
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,7 +15,10 @@ import New from './pages-dinamics/news/New';
 import ComicsBack from './backend/comics-back/ComicsBack';
 import UsersBackForm from './backend/users-back/users-back-form/UsersBackForm';
 import NewsBack from './backend/news-back/NewsBack';
-import Nav2 from './layout/nav2/Nav2';
+
+import NavBar from './layout/navBar/NavBar';
+import Footer from './layout/footer/Footer'
+import Home from './pages/home/Home';
 
 
 
@@ -23,10 +26,10 @@ function App() {
   return (
     <>
       <Router>
-        {/* <Nav /> */}
-        <Nav2 />
+        <NavBar />
         <Routes>
-          <Route path="/" element={""}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/inicio" element={<Home />}></Route>
           <Route path="/login" element={""}></Route>
           <Route path="/noticias" element={<News />}></Route>
           <Route path="/noticias/:id" element={<New></New>}></Route>
@@ -46,6 +49,7 @@ function App() {
           <Route path="/news-back" element={<NewsBack></NewsBack>}></Route>
           <Route path="/comics-back" element={<ComicsBack />}></Route>
         </Routes>
+        <Footer />
       </Router>
     </>
   );
