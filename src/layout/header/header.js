@@ -1,10 +1,8 @@
-function Header() {
+import { Component } from "react";
 
-    return (
-        <>
-            <header></header>
-        </>
-    );
+class Header extends Component {
+
+
 }
 
 export default Header;
