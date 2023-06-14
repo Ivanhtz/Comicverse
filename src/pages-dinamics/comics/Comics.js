@@ -12,10 +12,6 @@ class Comics extends Component {
                 <header>
                     <h1>Lista de Comics</h1>
                 </header>
-				<Link to="/comics/comicsback">
-					<button>Editar Comics</button>
-				</Link>
-				<Outlet></Outlet>
 				{
 					comic.map(c =>
 					<article key={c.id}>

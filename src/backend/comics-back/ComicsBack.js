@@ -95,9 +95,6 @@ class ComicsBack extends Component {
 					<p>Nombre: {this.state.titulo}</p>
 				</div>
 				</main>
-				<Link to="/comics/comicsback">
-					<button>Editar Comics</button>
-				</Link>
             </section>
         )
     }
