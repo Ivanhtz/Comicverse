@@ -41,6 +41,7 @@ function App() {
           <Route path="/usuarios-servidor" element={<UsersBackForm />}></Route>
 
           <Route path="/news-back" element={<NewsBack></NewsBack>}></Route>
+		  <Route path="/comics-back" element={<ComicsBack/>}></Route>
         </Routes>
       </Router>
     </>

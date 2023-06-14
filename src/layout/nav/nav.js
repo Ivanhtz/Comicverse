@@ -33,6 +33,9 @@ function Nav() {
 					<li>
 						<Link to="/news-back">Formulario Noticias</Link>
 					</li>
+					<li>
+						<Link to="/comics-back">Formulario Comics</Link>
+					</li>
 				</ul>
 			</nav>
 		</>
