@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+
 } from 'react-router-dom';
 import Comics from './pages-dinamics/comics/Comics'
 import News from './pages-dinamics/news/News'
