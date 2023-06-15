@@ -14,6 +14,7 @@ import Comic from './pages-dinamics/comics/Comic';
 import New from './pages-dinamics/news/New';
 import ComicsBack from './backend/comics-back/ComicsBack';
 import UsersBackForm from './backend/users-back/users-back-form/UsersBackForm';
+import UsersBack from './backend/users-back/UsersBack';
 import NewsBack from './backend/news-back/NewsBack';
 
 import NavBar from './layout/navBar/NavBar';
@@ -44,7 +45,7 @@ function App() {
           <Route path="/usuarios/:id" element={<User />}></Route>
           <Route path="/quienes-somos" element={""}></Route>
           <Route path="/contacto" element={""}></Route>
-          <Route path="/usuarios-servidor" element={<UsersBackForm />}></Route>
+          <Route path="/usuarios-servidor" element={<UsersBack />}></Route>
 
           <Route path="/news-back" element={<NewsBack></NewsBack>}></Route>
           <Route path="/comics-back" element={<ComicsBack />}></Route>

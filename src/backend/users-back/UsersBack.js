@@ -1,4 +1,5 @@
 import UsersBackForm from "./users-back-form/UsersBackForm";
+import UsersBackList from "./users-back-list/UsersBackList";
 
 function UsersBack() {
     return (
@@ -12,6 +13,7 @@ function UsersBack() {
                 </header>
 
                 <UsersBackForm />
+                <UsersBackList />
             </section>
         </>
     );
