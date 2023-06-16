@@ -8,8 +8,7 @@ export default class ComicsValidator{
 	}
 
 	isNotEmpty(message){
-		if(!this.value)
-        {
+		if(!this.value){
             this.result.push(message);
         }
         return this;
@@ -18,11 +17,18 @@ export default class ComicsValidator{
 	isValidUrl(message){
 
 		const regexUrl = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
-		if(!regexUrl.test(this.value))
-        {
+		if(!regexUrl.test(this.value)){
             this.result.push(message);
         }
         return this;
+	}
+
+	isShorterThan(message){
+		const regexShorterThan = /^[a-z]{0,15}$/;
+		if(!regexShorterThan.test(this.value)){
+			this.result.push(message);
+		}
+		return this;
 	}
 
 }
