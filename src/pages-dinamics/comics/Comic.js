@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Comic = () =>{
     let {id} = useParams();
 	let comicSeleccionado = comic.find((c) => c.id == id);
-	console.log(comicSeleccionado);
     
     return (
         <>
