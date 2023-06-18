@@ -1,0 +1,27 @@
+#comics {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+#comics h1 {
+	margin-bottom: 2rem;
+	font-weight: bold;
+}
+
+.divListaComics{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.truncate {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 3;
+	line-clamp: 3; 
+	-webkit-box-orient: vertical;
+
+}
