@@ -2,3 +2,13 @@
 	width: 200px;
 	height: 200px;
 }
+
+.comicIndividual{
+	background: white;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.imagenComicIndividual{
+	width: 100%;
+}

@@ -1,35 +1,40 @@
 import { useParams } from "react-router-dom";
 import comic from "../../data/comic"
 import { Link } from "react-router-dom";
+import { Button, Container, Typography } from "@mui/material";
+import "./Comic.css";
 
-const Comic = () =>{
-    let {id} = useParams();
+const Comic = () => {
+	let { id } = useParams();
 	let comicSeleccionado = comic.find((c) => c.id == id);
-    
-    return (
-        <>
-            <header>
-                <h1>Esta es la noticia {id}</h1>
-            </header>    
-			{
-			<article key={comicSeleccionado.id}>
+
+	return (
+		<>
+			<Container maxWidth="sm"  className="comicIndividual">
 				<header>
-					<h2>{comicSeleccionado.title}</h2>
+					<h1>Esta es la noticia {id}</h1>
 				</header>
-				<figure>
-					<img src={comicSeleccionado.image}/>
-				</figure>
-				<p>
-					{comicSeleccionado.content}
-				</p>
-				<span>Autor: {comicSeleccionado.author}</span>
-				<Link to="/comics">
-					<button>Volver</button>
-				</Link>
-			</article>
-			}
-        </>
-    )
+				{
+					<article key={comicSeleccionado.id}>
+						<header>
+							<h2>{comicSeleccionado.title}</h2>
+						</header>
+						<figure>
+							<img className="imagenComicIndividual" src={comicSeleccionado.image} />
+						</figure>
+						<Typography variant="body2" color="text.primary">
+							{comicSeleccionado.content}
+						</Typography>
+						<p>Autor: {comicSeleccionado.author}</p>
+						<Link to="/comics">
+							<Button variant="contained">Volver</Button>
+						</Link>
+					</article>
+
+				}
+			</Container>
+		</>
+	)
 }
 
 export default Comic;
