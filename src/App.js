@@ -20,6 +20,7 @@ import NewsBack from './backend/news-back/NewsBack';
 import NavBar from './layout/navBar/NavBar';
 import Footer from './layout/footer/Footer'
 import Home from './pages/home/Home';
+import Contact from './pages/contact/Contact';
 
 
 
@@ -44,7 +45,7 @@ function App() {
           <Route path="/usuarios" element={<Users />}></Route>
           <Route path="/usuarios/:id" element={<User />}></Route>
           <Route path="/quienes-somos" element={""}></Route>
-          <Route path="/contacto" element={""}></Route>
+          <Route path="/contacto" element={<Contact />}></Route>
           <Route path="/usuarios-servidor" element={<UsersBack />}></Route>
 
           <Route path="/news-back" element={<NewsBack></NewsBack>}></Route>
