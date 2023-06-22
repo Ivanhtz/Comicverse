@@ -50,10 +50,10 @@ export default function ComicsBackList() {
 				{
 					comicsFromStorage.map((comic, index) => (
 						<tr key={index}>
-							<td>{comic.values.titulo}</td>
-							<td>{comic.values.imagen}</td>
-							<td>{comic.values.contenido}</td>
-							<td>{comic.values.autor}</td>
+							<td>{comic.title}</td>
+							<td>{comic.image}</td>
+							<td>{comic.content}</td>
+							<td>{comic.author}</td>
 							<td>
 								<button>Edit</button>
 								<button onClick={() => handleDelete(index)}>Delete</button>
