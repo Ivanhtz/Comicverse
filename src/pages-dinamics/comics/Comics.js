@@ -10,11 +10,11 @@ export default function Comics() {
 	let arrayComics;
 	let comicsStorage = JSON.parse(localStorage.getItem("comics"));
 
-	if(comicsStorage.length > 0){
-		arrayComics = JSON.parse(localStorage.getItem("comics"));
-	}else{
-		arrayComics =  comic;
-		localStorage.setItem("comics", JSON.stringify(comic));
+	if (comicsStorage && comicsStorage.length > 0) {
+	arrayComics = comicsStorage;
+	} else {
+	arrayComics = comic;
+	localStorage.setItem("comics", JSON.stringify(comic));
 	}
 
 		return (
