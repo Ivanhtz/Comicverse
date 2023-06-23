@@ -1,14 +1,10 @@
 import noticias from "../../data/news";
 import { Link } from "react-router-dom";
 import "./News.css"
-
+import React, { useEffect, useState } from 'react';
 const { Component } = require("react");
-
-class News extends Component {
-
-    render() {
-
-        return (
+ function News(){
+  return (
             <section>
                 <header>
                     <h1 style={{textAlign:"center",color:"white"}}>Lista de Noticias</h1>
@@ -32,20 +28,12 @@ class News extends Component {
                             </div>
                             </Link>
                         </div>
-                        
-                        
                     ))
                 }
-
                 </section>
-
                 </div> 
-
-
-
             </section>
         )
-    }
 }
+export default News
 
-export default News;
