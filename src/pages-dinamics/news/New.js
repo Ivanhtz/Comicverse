@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import noticias from '../../data/news';
+import "./News.css"
 const New = () => {
     const { id } = useParams();
     const noticia = noticias.find((noticia) => noticia.id == id);
@@ -11,18 +12,17 @@ const New = () => {
 
     return (
         <section style={{margin:'auto'}}>
-            <header style={{height:'225px',backgroundImage:`url(${noticia.image})`}}>
-                
-            </header>
-            <article>
-                <h1>{noticia.title}</h1>
-                <span><small>{noticia.date}</small> | {noticia.author}</span> 
-                <hr></hr>
-                <p>{noticia.content}</p>
-               
-            </article>
-            <Link to={`/noticias`}>Volver</Link>
+            <section class="hero">
+                <div>
+                    <h1>{noticia.author}</h1>
+                    <p>{noticia.content}</p>
+                    <Link to={`/noticias`}> <a class="cta" href="">Volver</a> </Link>
+                </div>
+                <img src={noticia.image} alt=""/>
+            </section>
+           
         </section>
+        
     );
 }
 

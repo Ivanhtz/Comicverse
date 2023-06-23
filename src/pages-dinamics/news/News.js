@@ -1,5 +1,7 @@
 import noticias from "../../data/news";
 import { Link } from "react-router-dom";
+import "./News.css"
+
 const { Component } = require("react");
 
 class News extends Component {
@@ -9,24 +11,38 @@ class News extends Component {
         return (
             <section>
                 <header>
-                    <h1>Lista de Noticias</h1>
+                    <h1 style={{textAlign:"center",color:"white"}}>Lista de Noticias</h1>
                 </header>
+                <div className="content-wrapper">
                 <section style={{display: 'flex', alignItems: 'center', flexWrap: 'wrap' ,}}>
                 {
                     noticias.map((noticia=>
-                        <article  style={{margin:'auto',width:'45%',maxHeight:'70%', marginBottom: '20px', padding: '10px', border: '1px solid black' }} key={noticia.id}>
-                            <header style={{height:'225px', backgroundImage: `url(${noticia.image})` }}>
-                                <h2 style={{ color: 'green', fontSize: '20px' }}>{noticia.title}</h2>
-                            </header>
-                            <p>
-                                {noticia.content}
-                            </p>
-                            <Link to={`/noticias/${noticia.id}`}>Ver detalles {noticia.id}</Link>
-                            <span style={{ color: 'black', fontWeight: 'bold' }}>{noticia.author}</span>
-                        </article>
+                      
+                        <div className="news-card" key={noticia.id}>
+                              <Link to={`/noticias/${noticia.id}`}>
+                            <a className="news-card__card-link"></a>
+                            <img src={noticia.image} alt="" className="news-card__image"/>
+                            <div className="news-card__text-wrapper">
+                            <h2 className="news-card__title">{noticia.title}</h2>
+                            <div className="news-card__post-date">{noticia.date} | {noticia.author}</div>
+                            <div className="news-card__details-wrapper">
+                                <p className="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                                <Link to={`/noticias/${noticia.id}`}><a style={{textDecoration:"none"}} className="news-card__read-more">Read more <i className="fas fa-long-arrow-alt-right"></i></a></Link>
+                            </div>
+                            </div>
+                            </Link>
+                        </div>
+                        
+                        
                     ))
                 }
+
                 </section>
+
+                </div> 
+
+
+
             </section>
         )
     }
