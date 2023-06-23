@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import comic from "../../data/comic"
 import { Link } from "react-router-dom";
 import { Button, Container, Typography } from "@mui/material";
@@ -8,6 +8,10 @@ const Comic = () => {
 	let { id } = useParams();
 	let comicLocalStorage = JSON.parse(localStorage.getItem("comics"));
 	let comicSeleccionado = comicLocalStorage.find((comic) => comic.id == id);
+
+	if (!comicSeleccionado) {
+		return <Navigate to='/not-found'/>;
+	  }
 
 	return (
 		<>
