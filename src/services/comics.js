@@ -44,4 +44,14 @@ const eliminarComic = async (noticiaId) => {
   }
 };
 
-export { getComics, crearComics, actualizarComic, eliminarComic };
+const getComic = async (comicSeleccionado) => {
+	try {
+	  const response = await axios.get('http://localhost:4000/comics/'+comicSeleccionado);
+	  return response.data;
+	} catch (error) {
+	  console.error(error);
+	  return null;
+	}
+  };
+
+export { getComics, crearComics, actualizarComic, eliminarComic, getComic };
