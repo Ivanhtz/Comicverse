@@ -8,16 +8,16 @@ export default class ComicsBackForm extends Component{
 
 		this.state = { 
 			values: {
-				titulo: "",
-				imagen: "",
-				contenido: "",
-				autor: "",
+				title: "",
+				image: "",
+				content: "",
+				author: "",
 			},
 			validations: {
-				titulo: "",
-				imagen: "",
-				contenido: "",
-				autor: ""
+				title: "",
+				image: "",
+				content: "",
+				author: ""
 			}
 		};
 	}
@@ -46,18 +46,18 @@ export default class ComicsBackForm extends Component{
 	}
 
 	validateAll = () => {
-        const {titulo, imagen, contenido, autor} = this.state.values;
+        const {title, image, content, author} = this.state.values;
         const validations =   {
-            titulo: "",
-            imagen: "",
-            contenido: "",
-            autor: ""
+            title: "",
+            image: "",
+            content: "",
+            author: ""
         }
 
-        validations.titulo = this.validateTitulo(titulo);
-        validations.imagen = this.validateUrl(imagen);
-        validations.contenido = this.validateContenido(contenido);
-        validations.autor = this.validateAutor(autor);
+        validations.title = this.validateTitulo(title);
+        validations.image = this.validateUrl(image);
+        validations.content = this.validateContenido(content);
+        validations.author = this.validateAutor(author);
 
         const mensajesValidacion = Object.values(validations).filter(mensaje => mensaje.length > 0)
 
@@ -114,7 +114,7 @@ export default class ComicsBackForm extends Component{
         }
 
 		//Crea el objeto
-		const newComic = this.state;
+		const newComic = this.state.values;
 
 		//Me devuelve el array
 		let arrayNuevo = JSON.parse(localStorage.getItem("comics"));
@@ -122,6 +122,12 @@ export default class ComicsBackForm extends Component{
 		//Comprobacion
 		if(!arrayNuevo){
 			arrayNuevo=[];
+		}else{
+			//cojo valor máximo de un array de ids
+			const maxId = Math.max(...arrayNuevo.map((item) => item.id));
+			console.log(maxId);
+			console.log(...arrayNuevo.map((item) => item.id));
+			newComic.id = maxId+1;
 		}
 
 		//Esto es la adicion
@@ -130,10 +136,10 @@ export default class ComicsBackForm extends Component{
 		//Limpio el state y por tanto el formulario
 		this.setState({
 			values: {
-				titulo: '',
-				imagen: '',
-				contenido: '',
-				autor: ''
+				title: '',
+				image: '',
+				content: '',
+				author: ''
 			}
         }); 
 
@@ -144,13 +150,13 @@ export default class ComicsBackForm extends Component{
 
     render() {
 
-		const {titulo, imagen, contenido, autor} = this.state.values;
+		const {title, image, content, author} = this.state.values;
 
 		const {
-            titulo: tituloVal,
-            imagen: imagenVal,
-            contenido: contenidoVal,
-            autor: autorVal
+            title: tituloVal,
+            image: imagenVal,
+            content: contenidoVal,
+            author: autorVal
         } = this.state.validations;
 
         return (
@@ -162,28 +168,28 @@ export default class ComicsBackForm extends Component{
 				<form onSubmit={this.handleSubmit}>
 					<div>
 						<label> Título:
-							<input type="text" value= {titulo} name="titulo"
+							<input type="text" value= {title} name="title"
 							onChange={this.handleChange}></input>
 						</label>
 						<p>{tituloVal}</p>
 					</div>
 					<div>
 						<label> Imagen:
-							<input type="text" value= {imagen} name="imagen"
+							<input type="text" value= {image} name="image"
 							onChange={this.handleChange}></input>
 						</label>
 						<p>{imagenVal}</p>
 					</div>
 					<div>
 						<label> Contenido:
-							<input type="text" value= {contenido} name="contenido"
+							<input type="text" value= {content} name="content"
 							onChange={this.handleChange}></input>
 						</label>
 						<p>{contenidoVal}</p>
 					</div>
 					<div>
 						<label> Autor:
-							<input type="text" value= {autor} name="autor"
+							<input type="text" value= {author} name="author"
 							onChange={this.handleChange}></input>
 						</label>
 						<p>{autorVal}</p>
