@@ -1,8 +1,7 @@
 import { Component } from "react"
 
 export default class ComicsValidator{
-	constructor(value){
-		      
+	constructor(value){ 
 		this.value = value;	
 		this.result = [];
 	}
@@ -24,7 +23,7 @@ export default class ComicsValidator{
 	}
 
 	isShorterThan(message){
-		const regexShorterThan = /^[a-z]{0,15}$/;
+		const regexShorterThan = /^[a-zA-Z0-9]{0,15}$/;
 		if(!regexShorterThan.test(this.value)){
 			this.result.push(message);
 		}

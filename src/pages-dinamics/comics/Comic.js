@@ -6,14 +6,12 @@ import "./Comic.css";
 
 const Comic = () => {
 	let { id } = useParams();
-	let comicSeleccionado = comic.find((c) => c.id == id);
+	let comicLocalStorage = JSON.parse(localStorage.getItem("comics"));
+	let comicSeleccionado = comicLocalStorage.find((comic) => comic.id == id);
 
 	return (
 		<>
 			<Container maxWidth="sm"  className="comicIndividual">
-				<header>
-					<h1>Esta es la noticia {id}</h1>
-				</header>
 				{
 					<article key={comicSeleccionado.id}>
 						<header>
