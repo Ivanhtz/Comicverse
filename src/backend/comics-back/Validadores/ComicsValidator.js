@@ -15,7 +15,7 @@ export default class ComicsValidator{
 
 	isValidUrl(message){
 
-		const regexUrl = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+		const regexUrl = /^https?:\/\/[^\s\/$.?#].[^\s]*.(jpg|jpeg|png|gif|bmp)$/;
 		if(!regexUrl.test(this.value)){
             this.result.push(message);
         }
@@ -23,7 +23,7 @@ export default class ComicsValidator{
 	}
 
 	isShorterThan(message){
-		const regexShorterThan = /^[a-zA-Z0-9]{0,15}$/;
+		const regexShorterThan = /^[a-zA-Z0-9:\-\s]{0,100}$/;
 		if(!regexShorterThan.test(this.value)){
 			this.result.push(message);
 		}

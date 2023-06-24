@@ -1,41 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import './ComicsBackList.css';
+import { getComics, eliminarComic } from '../../../services/comics';
 
 export default function ComicsBackList() {
 
-	let comicsFromStorage = JSON.parse(localStorage.getItem("comics"));
-	const [comics, setComics] = useState('');
+	const [comicsFromDb, setGetComicsFromDb] = useState([]);
 
-	//Es como el componentDidMount de las clases.
-	//al pasarle en el segundo parámetro [] se evita que se ejecute en cada update del componente
+	//El use Effect es como el componente DidMount 
 	useEffect(() => {
-		setComics(comics => comics = comicsFromStorage);
-	}, []);
+		// Obtener noticias al cargar el componente
+		obtenerComics()
+	}, [])
 
-	console.log(comics);
-
-	if(!comicsFromStorage){
-		let comicsArray = [];
-		localStorage.setItem("comics", JSON.stringify(comicsArray));	
-	}	
-
-	const handleDelete = (indexToDelete) => {
-		if(comics){
-			let comicsNuevos = comics.filter(
-				(comic, index) => {return index != indexToDelete}
-			); 
-			
-			setComics(comics => comics = comicsNuevos);
-			localStorage.setItem("comics", JSON.stringify(comicsNuevos));
+	const obtenerComics = async () => {
+		const data = await getComics();
+		if (data) {
+			setGetComicsFromDb(data);
 		}
 	};
 
+	//borro el comic seleccionado y gestiono si se borró correctamente mediante el status, si es así
+	//actualizo el estado con el estado con la lista de comics actualizada
+	const handleDelete = (idToDelete) => {
+		if (comicsFromDb) {
+			eliminarComic(idToDelete)
+			.then((status) => {
+				if (status === 200) {
+					let comicsNuevos = comicsFromDb.filter((comic) =>  comic.id !== idToDelete );
+					setGetComicsFromDb(comicsNuevos);
+				}
+			});
+		}
+	};
 
-	if(!comicsFromStorage){
-		 comicsFromStorage = JSON.parse(localStorage.getItem("comics"));
-	}
-    return (
-        <>	
+	return (
+		<>
 			<table className="comicsTable">
 				<thead>
 					<tr>
@@ -47,23 +46,23 @@ export default function ComicsBackList() {
 					</tr>
 				</thead>
 				<tbody>
-				{
-					comicsFromStorage.map((comic, index) => (
-						<tr key={index}>
-							<td>{comic.title}</td>
-							<td>{comic.image}</td>
-							<td>{comic.content}</td>
-							<td>{comic.author}</td>
-							<td>
-								<button>Edit</button>
-								<button onClick={() => handleDelete(index)}>Delete</button>
-							</td>
+					{
+						comicsFromDb.map((comic, index) => (
+							<tr key={index}>
+								<td>{comic.title}</td>
+								<td>{comic.image}</td>
+								<td>{comic.content}</td>
+								<td>{comic.author}</td>
+								<td>
+									<button>Edit</button>
+									<button onClick={() => handleDelete(comic.id)}>Delete</button>
+								</td>
 
-						</tr>
-					))
-				}
+							</tr>
+						))
+					}
 				</tbody>
 			</table>
-        </>
-    );
+		</>
+	);
 }

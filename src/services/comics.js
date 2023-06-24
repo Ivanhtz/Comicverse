@@ -12,9 +12,9 @@ const getComics = async () => {
 };
 
 // Servicio para crear una nueva noticia
-const crearComics = async (nuevaNoticia) => {
+const crearComics = async (nuevoComic) => {
   try {
-    const response = await axios.post('https://api.example.com/noticias', nuevaNoticia);
+    const response = await axios.post('http://localhost:4000/comics/', nuevoComic);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -23,9 +23,9 @@ const crearComics = async (nuevaNoticia) => {
 };
 
 // Servicio para actualizar una noticia existente
-const actualizarComic = async (noticiaId, datosActualizados) => {
+const actualizarComic = async (comicId, datosActualizados) => {
   try {
-    const response = await axios.put(`https://api.example.com/noticias/${noticiaId}`, datosActualizados);
+    const response = await axios.put(`http://localhost:4000/comics/${comicId}`, datosActualizados);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -34,10 +34,11 @@ const actualizarComic = async (noticiaId, datosActualizados) => {
 };
 
 // Servicio para eliminar una noticia
-const eliminarComic = async (noticiaId) => {
+const eliminarComic = async (comicId) => {
   try {
-    const response = await axios.delete(`https://api.example.com/noticias/${noticiaId}`);
-    return response.data;
+    const response = await axios.delete(`http://localhost:4000/comics/${comicId}`);
+	//me retornaba un objeto vacío en data, así que devuelvo el status para saber si me hace el borrado bien y gestionarlo de acuerdo a eso
+    return response.status;
   } catch (error) {
     console.error(error);
     return null;

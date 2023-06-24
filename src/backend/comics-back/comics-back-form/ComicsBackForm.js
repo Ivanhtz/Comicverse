@@ -1,5 +1,6 @@
 import { Component } from "react"
 import ComicsValidator from "../Validadores/ComicsValidator";
+import { getComics, crearComics } from '../../../services/comics';
 
 export default class ComicsBackForm extends Component{
 
@@ -21,17 +22,6 @@ export default class ComicsBackForm extends Component{
 			}
 		};
 	}
-
-	//TODO: mirar esto
-/* 	componentDidMount() {
-		const comics = localStorage.getItem("comics");
-
-		if(!comics){
-			let comicsArray = [];
-			localStorage.setItem("comics", JSON.stringify(comicsArray));
-		}
-
-	} */
 
 	handleChange = (e) => {
 		const {name, value} = e.target;
@@ -116,23 +106,6 @@ export default class ComicsBackForm extends Component{
 		//Crea el objeto
 		const newComic = this.state.values;
 
-		//Me devuelve el array
-		let arrayNuevo = JSON.parse(localStorage.getItem("comics"));
-
-		//Comprobacion
-		if(!arrayNuevo){
-			arrayNuevo=[];
-		}else{
-			//cojo valor máximo de un array de ids
-			const maxId = Math.max(...arrayNuevo.map((item) => item.id));
-			console.log(maxId);
-			console.log(...arrayNuevo.map((item) => item.id));
-			newComic.id = maxId+1;
-		}
-
-		//Esto es la adicion
-		const arrayUpdateado= [...arrayNuevo, newComic];
-
 		//Limpio el state y por tanto el formulario
 		this.setState({
 			values: {
@@ -143,9 +116,8 @@ export default class ComicsBackForm extends Component{
 			}
         }); 
 
-		localStorage.setItem("comics", JSON.stringify(arrayUpdateado));
+		crearComics(newComic);
 	}
-
 	
 
     render() {
