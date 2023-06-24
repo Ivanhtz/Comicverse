@@ -1,6 +1,5 @@
 import { Component } from "react"
 import ComicsValidator from "../Validadores/ComicsValidator";
-import { getComics, crearComics } from '../../../services/comics';
 
 export default class ComicsBackForm extends Component{
 
@@ -116,7 +115,7 @@ export default class ComicsBackForm extends Component{
 			}
         }); 
 
-		crearComics(newComic);
+		this.props.handleAddComic(newComic);
 	}
 	
 
