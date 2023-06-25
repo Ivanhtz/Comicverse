@@ -1,5 +1,4 @@
-import { Navigate, useParams } from "react-router-dom";
-import comic from "../../data/comic"
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Container, Typography } from "@mui/material";
 import "./Comic.css";
@@ -8,27 +7,27 @@ import { getComic } from '../../services/comics';
 import "./Comics.css";
 
 const Comic = () => {
+	//obtengo la id que recibo por parámetro de url
 	let { id } = useParams();
-	let comicLocalStorage = JSON.parse(localStorage.getItem("comics"));
-	let comicSeleccionado = comicLocalStorage.find((comic) => comic.id == id);
+	const navigation = useNavigate();
 
 	const [comic, setComic] = useState([]);
 	  
 	//El use Effect es como el componente DidMount 
     useEffect(() => {
 		// Obtener noticias al cargar el componente
-		obtenerComic(comicSeleccionado.id)
+		obtenerComic(id)
 	  }, [])
 
-	if (!comicSeleccionado) {
-		return <Navigate to='/not-found'/>;
-	  }
   
 	  //Esto es la funcion 
 	  const obtenerComic = async () => {
-		  const data = await getComic(comicSeleccionado.id);
+		  const data = await getComic(id);
 		  if (data) {
 			  setComic(data);
+		  }else{
+			//tuve que usar esto porque al ser asíncrono ya no me servía el return <Navigate to='/not-found'/>
+			navigation("/not-found");
 		  }
 		};
 

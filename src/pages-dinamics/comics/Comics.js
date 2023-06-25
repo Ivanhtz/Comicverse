@@ -25,17 +25,6 @@ export default function Comics() {
         }
       };
 
-
-	let arrayComics;
-	let comicsStorage = JSON.parse(localStorage.getItem("comics"));
-
-	if (comicsStorage && comicsStorage.length > 0) {
-		arrayComics = comicsStorage;
-	} else {
-		arrayComics = comic;
-		localStorage.setItem("comics", JSON.stringify(comic));
-	}
-
 		return (
 			<section id="comics">
 				<header>

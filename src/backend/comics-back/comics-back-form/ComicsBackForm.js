@@ -1,36 +1,24 @@
 import { useEffect, useState } from "react";
 import ComicsValidator from "../Validadores/ComicsValidator";
+import ComicDTO from "../../../models/ComicDTO";
+import ComicValidacionesDTO from "../../../models/ComicValidacionesDTO";
 
 
 export default function ComicsBackForm(props) {
 
+	//estado para cuando se crea un comic nuevo
+	const [valuesComic, setValuesComic] = useState(new ComicDTO());
+
+	const [validations, setValidations] = useState(new ComicValidacionesDTO());
+
+
 	useEffect(() => {
 		//hago esto para evitar que me de un warning de uncontrolled component
 		//porque de primeras llega el objeto con propiedades nulas
-		setValuesComic({
-			id: props.comicAEditar.id ?? null,
-			title: props.comicAEditar.title ?? "",
-			image: props.comicAEditar.image ?? "",
-			content: props.comicAEditar.content ?? "",
-			author: props.comicAEditar.author ?? "",
-		});
+
+		// setValuesComic(new ComicDTO(props.comicAEditar));
+		setValuesComic(props.comicAEditar);
 	}, [props.comicAEditar])
-
-	//estado para cuando se crea un comic nuevo
-	const [valuesComic, setValuesComic] = useState({
-		id: null,
-		title: "",
-		image: "",
-		content: "",
-		author: "",
-	});
-
-	const [validations, setValidations] = useState({
-		title: "",
-		image: "",
-		content: "",
-		author: ""
-	});
 
 
 	const handleChange = (e) => {
@@ -43,17 +31,12 @@ export default function ComicsBackForm(props) {
 
 	const validateAll = () => {
 		const { title, image, content, author } = valuesComic;
-		const validations = {
-			title: "",
-			image: "",
-			content: "",
-			author: ""
-		}
+		const objValidaciones = new ComicValidacionesDTO();
 
-		validations.title = validateTitulo(title);
-		validations.image = validateUrl(image);
-		validations.content = validateContenido(content);
-		validations.author = validateAutor(author);
+		objValidaciones.title = validateTitulo(title);
+		objValidaciones.image = validateUrl(image);
+		objValidaciones.content = validateContenido(content);
+		objValidaciones.author = validateAutor(author);
 
 		const mensajesValidacion = Object.values(validations).filter(mensaje => mensaje.length > 0)
 
@@ -107,31 +90,15 @@ export default function ComicsBackForm(props) {
 			return false;
 		}
 
-		//Crea el objeto
-		const newComic = valuesComic;
+		props.handleAddComic(valuesComic);
 
 		//Limpio el state y por tanto el formulario
-		setValuesComic({
-			id: null,
-			title: '',
-			image: '',
-			content: '',
-			author: ''
-		});
-
-		props.handleAddComic(newComic);
+		setValuesComic(new ComicDTO());
 	}
 
-	//limpio el estado y envío los datos al método que edita del padre
+	//envío los datos al método que edita del padre
 	const editarComic = () => {
 		props.handleEdit(valuesComic.id, valuesComic);
-		setValuesComic({
-			id: null,
-			title: '',
-			image: '',
-			content: '',
-			author: ''
-		});
 	}
 
 
@@ -181,11 +148,11 @@ export default function ComicsBackForm(props) {
 					</div>
 					<div>
 						{
-							valuesComic.id === null && <button type="submit">Enviar</button>
+							valuesComic.id === -1 && <button type="submit">Enviar</button>
 						}
 						{
-							valuesComic.id !== null && <button type="button" onClick={editarComic}>Editar</button>				
-						} 
+							valuesComic.id !== -1 && <button type="button" onClick={editarComic}>Editar</button>
+						}
 					</div>
 				</form>
 			</main>

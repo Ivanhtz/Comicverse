@@ -2,6 +2,7 @@ import ComicsBackForm from './comics-back-form/ComicsBackForm';
 import ComicsBackList from './comics-back-list/ComicsBackList';
 import React, { useState, useEffect } from 'react';
 import { getComics, crearComics, eliminarComic, actualizarComic} from '../../services/comics';
+import ComicDTO from '../../models/ComicDTO';
 
 export default function ComicsBack() {
 
@@ -9,7 +10,7 @@ export default function ComicsBack() {
 	//aal hacerlo así, se actualiza automáticamente la vista al detectar los cambios
 	const [comicsFromDb, setGetComicsFromDb] = useState([]);
 
-	const[comicAEditar, setComicAEditar] = useState({});
+	const[comicAEditar, setComicAEditar] = useState(new ComicDTO());
 
 	useEffect(() => {
 		obtenerComics()
@@ -52,7 +53,7 @@ export default function ComicsBack() {
 		 comicsTempEditados.push(comicToModify);
 		 setGetComicsFromDb(comicsTempEditados);
 		 //vacío el comic a editar para que el formulario vuelva a mostrarse vacío una vez se ha editado
-		 setComicAEditar({});
+		 setComicAEditar(new ComicDTO());
 		})
 	}
 
@@ -70,9 +71,3 @@ export default function ComicsBack() {
 		</>
 	)
 }
-
-
-// TODO
-// setear comicAEditar desde ComicBackList
-// mostrar boton editar en el form
-// usar handleEdit en el form
