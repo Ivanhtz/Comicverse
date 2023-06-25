@@ -6,7 +6,7 @@ export default function ComicsBackList(props) {
 
 	//extrae las propiedades que llega en props y las guarda en las variables
 	//estas tienen que llamarse igual que el prop para que lo encuentre
-	const {datosComics, handleDelete} = props;
+	const {datosComics, handleDelete, setComicAEditar} = props;
 
 	
 
@@ -31,7 +31,7 @@ export default function ComicsBackList(props) {
 								<td>{comic.content}</td>
 								<td>{comic.author}</td>
 								<td>
-									<button>Edit</button>
+									<button onClick={() => setComicAEditar(comic)}>Edit</button>
 									<button onClick={() => handleDelete(comic.id)}>Delete</button>
 								</td>
 

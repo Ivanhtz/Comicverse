@@ -1,176 +1,194 @@
-import { Component } from "react"
+import { useEffect, useState } from "react";
 import ComicsValidator from "../Validadores/ComicsValidator";
 
-export default class ComicsBackForm extends Component{
 
-	constructor(props){
-		super(props);
+export default function ComicsBackForm(props) {
 
-		this.state = { 
-			values: {
-				title: "",
-				image: "",
-				content: "",
-				author: "",
-			},
-			validations: {
-				title: "",
-				image: "",
-				content: "",
-				author: ""
-			}
-		};
+	useEffect(() => {
+		//hago esto para evitar que me de un warning de uncontrolled component
+		//porque de primeras llega el objeto con propiedades nulas
+		setValuesComic({
+			id: props.comicAEditar.id ?? null,
+			title: props.comicAEditar.title ?? "",
+			image: props.comicAEditar.image ?? "",
+			content: props.comicAEditar.content ?? "",
+			author: props.comicAEditar.author ?? "",
+		});
+	}, [props.comicAEditar])
+
+	//estado para cuando se crea un comic nuevo
+	const [valuesComic, setValuesComic] = useState({
+		id: null,
+		title: "",
+		image: "",
+		content: "",
+		author: "",
+	});
+
+	const [validations, setValidations] = useState({
+		title: "",
+		image: "",
+		content: "",
+		author: ""
+	});
+
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setValuesComic({
+			...valuesComic,
+			[name]: value
+		});
 	}
 
-	handleChange = (e) => {
-		const {name, value} = e.target;
-		this.setState(
-			{
-				values:{
-                    ...this.state.values,                   
-                    [name]:value
-                }
-			}
-		);
+	const validateAll = () => {
+		const { title, image, content, author } = valuesComic;
+		const validations = {
+			title: "",
+			image: "",
+			content: "",
+			author: ""
+		}
+
+		validations.title = validateTitulo(title);
+		validations.image = validateUrl(image);
+		validations.content = validateContenido(content);
+		validations.author = validateAutor(author);
+
+		const mensajesValidacion = Object.values(validations).filter(mensaje => mensaje.length > 0)
+
+		const isValid = !mensajesValidacion.length;
+
+		if (!isValid) {
+			setValidations({
+				validations
+			});
+		}
+		return isValid;
 	}
 
-	validateAll = () => {
-        const {title, image, content, author} = this.state.values;
-        const validations =   {
-            title: "",
-            image: "",
-            content: "",
-            author: ""
-        }
+	const validateTitulo = (value) => {
+		const validatorTitulo = new ComicsValidator(value);
+		return validatorTitulo
+			.isNotEmpty("Obligatorio")
+			.isShorterThan("El título es demasiado largo. Máximo 15 caracteres.")
+			.result
+	}
 
-        validations.title = this.validateTitulo(title);
-        validations.image = this.validateUrl(image);
-        validations.content = this.validateContenido(content);
-        validations.author = this.validateAutor(author);
+	const validateUrl = (url) => {
+		const validatorUrl = new ComicsValidator(url);
+		return validatorUrl
+			.isNotEmpty("Obligatorio")
+			.isValidUrl("No es una url válida")
+			.result
+	}
 
-        const mensajesValidacion = Object.values(validations).filter(mensaje => mensaje.length > 0)
 
-        const isValid = !mensajesValidacion.length;
+	const validateContenido = (url) => {
+		const validatorContenido = new ComicsValidator(url);
+		return validatorContenido
+			.isNotEmpty("Obligatorio")
+			.result
+	}
 
-        if(!isValid)
-        {
-            this.setState({
-                validations
-            });
-        }
-        return isValid;
-    }
+	const validateAutor = (url) => {
+		const validatorAutor = new ComicsValidator(url);
+		return validatorAutor
+			.isNotEmpty("Obligatorio")
+			.result
+	}
 
-	validateTitulo = (value) => {
-        const validatorTitulo = new ComicsValidator(value);
-        return validatorTitulo
-                    .isNotEmpty("Obligatorio")
-					.isShorterThan("El título es demasiado largo. Máximo 15 caracteres.")
-                    .result
-    }
-
-	validateUrl = (url) => {
-        const validatorUrl = new ComicsValidator(url);
-        return validatorUrl
-                    .isNotEmpty("Obligatorio")
-					.isValidUrl("No es una url válida")
-                    .result
-    }
-
-	
-	validateContenido = (url) => {
-        const validatorContenido = new ComicsValidator(url);
-        return validatorContenido
-                    .isNotEmpty("Obligatorio")
-                    .result
-    }
-
-	validateAutor = (url) => {
-        const validatorAutor = new ComicsValidator(url);
-        return validatorAutor
-                    .isNotEmpty("Obligatorio")
-                    .result
-    }
-
-	handleSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		
-		const isValid = this.validateAll();
 
-        if(!isValid)
-        {
-            return false;
-        }
+		const isValid = validateAll();
+
+		if (!isValid) {
+			return false;
+		}
 
 		//Crea el objeto
-		const newComic = this.state.values;
+		const newComic = valuesComic;
 
 		//Limpio el state y por tanto el formulario
-		this.setState({
-			values: {
-				title: '',
-				image: '',
-				content: '',
-				author: ''
-			}
-        }); 
+		setValuesComic({
+			id: null,
+			title: '',
+			image: '',
+			content: '',
+			author: ''
+		});
 
-		this.props.handleAddComic(newComic);
+		props.handleAddComic(newComic);
 	}
-	
 
-    render() {
+	//limpio el estado y envío los datos al método que edita del padre
+	const editarComic = () => {
+		props.handleEdit(valuesComic.id, valuesComic);
+		setValuesComic({
+			id: null,
+			title: '',
+			image: '',
+			content: '',
+			author: ''
+		});
+	}
 
-		const {title, image, content, author} = this.state.values;
 
-		const {
-            title: tituloVal,
-            image: imagenVal,
-            content: contenidoVal,
-            author: autorVal
-        } = this.state.validations;
+	const { title, image, content, author } = valuesComic;
 
-        return (
-            <section id="comic">
-                <header>
-                    <h1>Lista de Comics</h1>
-                </header>
-				<main>
-				<form onSubmit={this.handleSubmit}>
+	const {
+		title: tituloVal,
+		image: imagenVal,
+		content: contenidoVal,
+		author: autorVal
+	} = validations;
+
+	return (
+		<section id="comic">
+			<header>
+				<h1>Lista de Comics</h1>
+			</header>
+			<main>
+				<form onSubmit={handleSubmit}>
 					<div>
 						<label> Título:
-							<input type="text" value= {title} name="title"
-							onChange={this.handleChange}></input>
+							<input type="text" value={title} name="title"
+								onChange={handleChange}></input>
 						</label>
 						<p>{tituloVal}</p>
 					</div>
 					<div>
 						<label> Imagen:
-							<input type="text" value= {image} name="image"
-							onChange={this.handleChange}></input>
+							<input type="text" value={image} name="image"
+								onChange={handleChange}></input>
 						</label>
 						<p>{imagenVal}</p>
 					</div>
 					<div>
 						<label> Contenido:
-							<input type="text" value= {content} name="content"
-							onChange={this.handleChange}></input>
+							<input type="text" value={content} name="content"
+								onChange={handleChange}></input>
 						</label>
 						<p>{contenidoVal}</p>
 					</div>
 					<div>
 						<label> Autor:
-							<input type="text" value= {author} name="author"
-							onChange={this.handleChange}></input>
+							<input type="text" value={author} name="author"
+								onChange={handleChange}></input>
 						</label>
 						<p>{autorVal}</p>
 					</div>
 					<div>
-						<button type="submit">Enviar</button>
+						{
+							valuesComic.id === null && <button type="submit">Enviar</button>
+						}
+						{
+							valuesComic.id !== null && <button type="button" onClick={editarComic}>Editar</button>				
+						} 
 					</div>
 				</form>
-				</main>
-            </section>
-        )
-    }
+			</main>
+		</section>
+	)
 }
